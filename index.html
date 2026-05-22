@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Robotics Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --bg:#050816;
+  --card:#101528;
+  --accent:#00F5FF;
+  --accent2:#9B5CFF;
+  --text:#F5F7FA;
+  --muted:#A8B2D1;
+  --glass:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.08);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  line-height:1.7;
+}
+
+/* BACKGROUND */
+
+.bg-grid{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+
+  background-image:
+  linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+  background-size:40px 40px;
+}
+
+.glow{
+  position:fixed;
+  width:700px;
+  height:700px;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:.15;
+  z-index:-1;
+}
+
+.glow1{
+  background:cyan;
+  top:-200px;
+  left:-150px;
+}
+
+.glow2{
+  background:#7d3cff;
+  bottom:-200px;
+  right:-100px;
+}
+
+/* NAV */
+
+.inline-pdf-link{
+  font: inherit;
+}
+
+nav{
+  position:fixed;
+  width:100%;
+  top:0;
+  backdrop-filter:blur(12px);
+  background:rgba(5,8,22,.7);
+  border-bottom:1px solid var(--border);
+  z-index:1000;
+}
+
+nav ul{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  list-style:none;
+  gap:2rem;
+  padding:1rem;
+  flex-wrap:wrap;
+}
+
+nav a{
+  color:var(--muted);
+  text-decoration:none;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-size:.9rem;
+  transition:.3s;
+}
+
+nav a:hover{
+  color:var(--accent);
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:8rem 2rem 4rem;
+}
+
+.hero-content{
+  max-width:1000px;
+}
+
+.hero-tag{
+  display:inline-block;
+  padding:.5rem 1rem;
+  border:1px solid rgba(0,245,255,.4);
+  border-radius:999px;
+  background:rgba(0,245,255,.08);
+  color:var(--accent);
+  margin-bottom:1.5rem;
+  font-size:.9rem;
+  letter-spacing:1px;
+}
+
+h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(3rem,9vw,7rem);
+  line-height:1;
+  margin-bottom:1.5rem;
+
+  background:linear-gradient(90deg,#fff,var(--accent),#9B5CFF);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:1.2rem;
+  max-width:750px;
+  margin:0 auto 2rem;
+}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:1rem 1.5rem;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:600;
+  transition:.3s;
+  border:1px solid var(--border);
+}
+
+.btn-primary{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#000;
+}
+
+.btn-secondary{
+  background:rgba(255,255,255,.04);
+  color:white;
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 30px rgba(0,245,255,.3);
+}
+
+/* SECTIONS */
+
+section{
+  padding:6rem 8%;
+}
+
+.section-title{
+  font-family:'Orbitron',sans-serif;
+  font-size:2.8rem;
+  margin-bottom:1rem;
+}
+
+.section-subtitle{
+  color:var(--muted);
+  max-width:800px;
+  margin-bottom:3rem;
+}
+
+/* GLASS */
+
+.glass{
+  background:var(--glass);
+  border:1px solid var(--border);
+  backdrop-filter:blur(12px);
+  border-radius:24px;
+  padding:2rem;
+  transition:.3s;
+}
+
+.glass:hover{
+  transform:translateY(-6px);
+  border-color:rgba(0,245,255,.3);
+}
+
+/* GRID */
+
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+}
+
+@media(max-width:900px){
+  .grid-2{
+    grid-template-columns:1fr;
+  }
+}
+
+/* MEDIA */
+
+.media{
+  border:2px dashed rgba(0,245,255,.3);
+  border-radius:20px;
+  min-height:320px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:var(--muted);
+  margin-top:1.5rem;
+  padding:2rem;
+  background:rgba(255,255,255,.02);
+}
+
+.media video{
+  width:100%;
+  max-width:600px;
+  height:auto;
+  border-radius:12px;
+  border: 5px solid blue;
+  object-fit:contain;
+}
+
+.media img{
+  max-width:100%;
+  height:auto;
+  border-radius:10px;
+  border:5px solid blue;
+}
+
+.media.proj{
+  display:flex;
+  justify-content:space-evenly;
+  align-items:center;
+  gap:2rem;
+  flex-wrap:wrap;
+}
+
+.media.proj img{
+  width:400px;
+  height:auto;
+}
+
+.large-media{
+  min-height:450px;
+}
+
+.portrait-media {
+  min-height: unset;
+}
+
+.portrait-media video {
+  max-height: 320px;
+  width: auto;
+  max-width: 100%;
+}
+
+/* TEXT */
+
+h3{
+  color:var(--accent);
+  margin-bottom:1rem;
+}
+
+ul{
+  padding-left:1.2rem;
+}
+
+li{
+  margin-bottom:.7rem;
+}
+
+.quote{
+  margin-top:1.5rem;
+  padding-left:1.5rem;
+  border-left:4px solid var(--accent);
+  color:#d0d9f7;
+  font-style:italic;
+}
+
+/* CODE */
+
+.code{
+  margin-top:1.5rem;
+  background:#020617;
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:auto;
+  padding:1.5rem;
+}
+
+pre{
+  color:#7dd3fc;
+  font-size:.95rem;
+}
+
+/* ALGORITHM */
+
+.algo-section{
+  position:relative;
+  overflow:hidden;
+}
+
+.algo-section::before{
+  content:'';
+  position:absolute;
+  inset:0;
+
+  background:linear-gradient(
+    135deg,
+    rgba(0,245,255,.03),
+    transparent
+  );
+
+  pointer-events:none;
+}
+
+.algo-header{
+  display:flex;
+  gap:2rem;
+  align-items:flex-start;
+  margin-bottom:2rem;
+}
+
+.algo-number{
+  min-width:90px;
+  width:90px;
+  height:90px;
+
+  border-radius:24px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent2)
+  );
+
+  color:#000;
+
+  font-size:2rem;
+  font-weight:700;
+
+  font-family:'Orbitron',sans-serif;
+
+  box-shadow:0 0 30px rgba(0,245,255,.25);
+}
+
+.algo-title{
+  font-size:2rem;
+  margin-bottom:.5rem;
+}
+
+.algo-description{
+  color:var(--muted);
+}
+
+.algo-media-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:1.5rem;
+}
+
+@media(max-width:900px){
+
+  .algo-header{
+    flex-direction:column;
+  }
+
+  .algo-media-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+
+/* TIMELINE */
+
+/* TIMELINE */
+
+.timeline{
+  position:relative;
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.timeline::before{
+  content:'';
+  position:absolute;
+  left:40px;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:rgba(0,245,255,.18);
+}
+
+.timeline-item{
+  position:relative;
+  padding-left:7rem;
+  margin-bottom:4rem;
+}
+
+.timeline-item::before{
+  content:'';
+  position:absolute;
+  left:31px;
+  top:32px;
+
+  width:18px;
+  height:18px;
+  border-radius:50%;
+
+  background:var(--accent);
+
+  box-shadow:
+    0 0 20px var(--accent),
+    0 0 40px rgba(0,245,255,.5);
+}
+
+.timeline .glass{
+  padding:2.5rem;
+}
+
+.timeline .media{
+  margin-top:2rem;
+}
+/* FOOTER */
+
+footer{
+  padding:4rem 2rem;
+  text-align:center;
+  color:var(--muted);
+  border-top:1px solid var(--border);
+}
+
+/* FADE */
+
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all .8s ease;
+}
+
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+
+<!-- NAV -->
+
+<nav>
+  <ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#engineering">Engineering</a></li>
+    <li><a href="#media">Media</a></li>
+    <li><a href="#algorithm">Algorithm</a></li>
+    <li><a href="#simulation">Simulation</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#results">Results</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-content fade">
+
+    <div class="hero-tag">
+      TJ²
+    </div>
+
+    <h1>Dynamic Shooting from Static Lookup Tables</h1>
+
+    <div class="buttons">
+      <a href="#overview" class="btn btn-primary">Explore Project</a>
+      <a href="#algorithm" class="btn btn-secondary">View Algorithm</a>
+    </div>
+
+    <div class="media large-media">
+          <video autoplay loop muted playsinline>
+    		<source src="images/Video Project 10.mp4" type="video/mp4">
+  	  </video>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- OVERVIEW -->
+
+<section id="overview">
+
+  <div class="fade">
+
+    <h2 class="section-title">Project Overview</h2>
+
+    <p class="section-subtitle">
+      This project details the implementation of a "shoot-on-the-move" algorithm for the 2026 FIRST Robotics game: Rebuilt.
+    </p>
+
+    <div class="glass">
+
+      <h3>The Problem</h3>
+
+      <p>
+	In the game, a robot's objective is to shoot yellow balls known as "fuel" into the "hub" located on their respective sides of the field. To maximize throughput, the robot needed to fire projectiles accurately while translating across the field and collecting additional game pieces simultaneously. Our goal was to be able to accurately shoot and score regardless of robot motion.
+      </p>
+
+      <div class="media proj">
+	<img src="images/vj7_2788.jpg" alt="Playing Field">
+	<img src="images/2026-playing-field-page.jpg" alt="Playing Field">
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ENGINEERING -->
+
+<section id="engineering">
+
+  <div class="fade">
+
+    <h2 class="section-title">Mechanical + Electrical Design</h2>
+
+    <p class="section-subtitle">
+      The overall robot design was extremely influential in the versatility needed to shoot on the move
+    </p>
+
+    <div class="grid-2">
+
+      <div class="glass">
+
+        <h3>Mechanical Systems</h3>
+
+        <ul>
+          <li>Chassis design - Swerve drive system with 4 drive and 4 steer motors</li>
+          <li>270-degree turret powered by Falcon 500 motor</li>
+          <li>Hood with 14-35 degree angle range</li>
+          <li>Dual-motor powered flywheel with 100 RPS freespeed</li>
+        </ul>
+
+        <div class="media">
+          <video autoplay loop muted playsinline>
+    		<source src="images/Video Project 3.mp4" type="video/mp4">
+  	  </video>
+        </div>
+
+      </div>
+
+      <div class="glass">
+
+        <h3>Electrical Systems</h3>
+
+        <ul>
+          <li>Robo-RIO 2 handling all processing</li>
+          <li>12v DC Lead-Acid battery</li>
+          <li>CTRE Kraken motors with integrated encoders over CAN bus</li>
+          <li>Limelight 4s handling vision measurements</li>
+        </ul>
+
+        <div class="media">
+          <img src="images/msedge_HAZm3IHabi.png" alt="CTRE Kraken Motors">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- MEDIA -->
+
+
+<!-- ALGORITHM -->
+
+<section id="algorithm">
+
+  <div class="fade">
+
+    <h2 class="section-title">Algorithm Walkthrough</h2>
+	
+    <!-- SECTION 1 -->
+
+    <div class="algo-section glass">
+
+      <div class="algo-header">
+
+        <div class="algo-number">01</div>
+
+        <div>
+
+          <h3 class="algo-title">Sensors & Data Acquisition</h3>
+
+          <p class="algo-description">
+                    Shooting at different distances requires knowing where we are on the field, so we use a fused pose combining wheel odometry + vision measurements. 
+          </p>
+
+        </div>
+
+      </div>
+
+      <h2 style="margin-bottom: 10px">Wheel Odometry </h2>
+         <p style="margin-bottom: 10px">Swerve-based drive system where wheel deltas are recorded using magnetic encoders and integrated over time through forward kinematics. This forms the system model of the Kalman filter. Motor encoders also provide velocity in the x and y directions, as well as angular velocity measurements needed for the algorithm.</p> 
+	<h2 style="margin-bottom: 10px">Vision Measurements</h2>
+       <p style="margin-bottom: 10px">
+	AprilTags state estimation through Limelight 4s, an integrated camera on a Raspberry-Pi providing field relative pose estimates. This provides the measurement model in the Kalman filter.
+	</p>
+
+	<h2 style="margin-bottom: 10px">Kalman Filter</h2>
+	<p>Both measurements are combined in a latency-adjusted Kalman Filter. Filtering is done on all pose estimates, including adjusting standard deviation numbers based on distance and tag count, as well as rejecting any outliers.</p>
+
+<div class="glass" style="margin: 2rem 0;">
+
+  <h3>Pose Estimation Example</h3>
+
+<h2>
+  <strong>
+  <span style="color: red;">Red - Fused robot pose</span><br>
+  <span style="color: green;">Green - Accepted vision measurement</span><br>
+  <span style="color: orange;">Orange - Rejected pose (Standard Deviation too high, Outlier, etc.)</span>
+</strong>
+</h2>
+
+
+
+</div>
+
+      <div class="algo-media-grid">
+
+        <div class="media">
+           <video autoplay loop muted playsinline>
+    		<source src="images/Screen Recording 2026-05-20 182319.mp4" type="video/mp4">
+  	  </video>
+
+        </div>
+
+      </div>
+    
+    </div>
+
+    <br><br>
+
+    <!-- SECTION 2 -->
+
+    <div class="algo-section glass">
+
+      <div class="algo-header">
+
+        <div class="algo-number">02</div>
+
+        <div>
+
+          <h3 class="algo-title">The Algorithm</h3>
+
+          <p class="algo-description">
+            The central challenge with shooting on the move is that the ball has extra displacement when given an initial velocity
+          </p>
+
+        </div>
+
+      </div>
+
+<div class="glass" style="margin: 2rem 0;">
+
+  <h3>Key Insight</h3>
+
+  <p style="margin-bottom: 20px;">
+    A stationary robot can shoot using a static lookup table indexed only by distance. 
+    However, once the robot begins translating across the field, the problem becomes significantly harder.
+  </p>
+
+  <p style="margin-bottom: 20px;">
+    The projectile remains in the air for a nonzero amount of time, meaning the robot continues moving after the shot is fired. 
+    This creates a recursive dependency:
+  </p>
+
+  <div class="code">
+<pre>
+distance → time-of-flight
+time-of-flight → future distance
+</pre>
+  </div>
+
+  <p style="margin-top: 20px; margin-bottom: 20px;">
+    The distance to the target determines the projectile flight time, but the projectile flight time also determines 
+    how far the robot moves before the ball reaches the goal.
+  </p>
+
+  <p style="margin-bottom: 20px;">
+    To solve this, the algorithm predicts the future target position by projecting robot velocity forward in time 
+    and iteratively solving for a time-of-flight using Newton's Method.
+  </p>
+
+  <div class="code">
+<pre>
+E(t) = t - tof(d(t))
+</pre>
+  </div>
+
+  <p style="margin-top: 20px;">
+    The solver converges in only a few iterations and allows the robot to dynamically compensate for motion while shooting at full speed.
+  </p>
+
+</div>
+	
+      <h2>Flowchart:</h2> 
+      <div class="algo-media-grid">
+
+        <div class="media">
+          <img src="images/Screenshot 2026-05-21 095935.png" alt="Algorithm Flowchart">
+        </div>
+
+      </div>
+<div class="glass" style="margin: 2rem 0;">
+
+  <h3>Newton's Method & Uncertainty Propagation - Derivation <a href="images/Shoot_on_the_move.pdf" target="_blank" rel="noopener noreferrer" class="inline-pdf-link">found here</a></h3>
+
+
+  <p style="margin-bottom: 20px">
+  Newton's method requires an accurate estimate of distance to the target, but the fused robot pose produced by the Kalman filter inherently contains uncertainty from wheel slip, encoder noise, latency, and imperfect vision measurements. 
+  That uncertainty propagates directly into the projected target distance and therefore affects the probability of successfully scoring the shot.
+</p>
+
+<p style="margin-bottom: 20px">
+  To account for this, the algorithm propagates the covariance matrix of the fused robot pose through the projected distance function using first-order linearization. 
+  The result is a probability distribution of possible distances, and shot probabilities are calculated as:
+</p>
+
+<div class="code">
+<pre>
+p(hit) &lt; p_min
+</pre>
+</div>
+
+<p style="margin-top: 20px; margin-bottom: 20px">
+  If the calculated probability of landing within an acceptable tolerance falls below a minimum threshold, the shot is rejected. 
+  This prevents firing during periods of poor localization quality, unstable tracking, or excessive robot motion.
+</p>
+
+<p>
+  Overall, the projected targeting updates executed within the 50Hz robot control loop, and empirical testing demonstrated:
+</p>
+
+<ul style="margin-bottom: 30px">
+  <li>Stable Newton convergence across all legal shooting distances</li>
+  <li>Accurate shots while translating at constant velocity</li>
+  <li>Reliable shot rejection during poor localization conditions</li>
+  <li>Real-time execution within strict control-loop timing constraints</li>
+</ul>
+<h2>Demo Below ↓ -   <strong>
+  <span style="color: red;">Red - Fused robot pose.</span>
+  <span style="color: green;">Green - Projected target</span>
+</strong></h2>
+</div>
+      <div class="media large-media">
+               
+          <video autoplay loop muted playsinline>
+    		<source src="images/Video Project 5.mp4" type="video/mp4">
+  	  </video>
+        
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section id="media">
+
+  <div class="fade">
+
+    <h2 class="section-title">Demo Videos</h2>
+
+    <div class="glass">
+
+      <div class="media large-media">
+          <video autoplay loop muted playsinline>
+    		<source src="images/Video Project 2.mp4" type="video/mp4">
+  	  </video>
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="grid-2">
+
+      <div class="glass">
+
+        <h3>Autonomous</h3>
+
+        <div class="media">
+          <video autoplay loop muted playsinline>
+		<source src="images/IMG_0423.mp4" type="video/mp4">
+	</video>
+        </div>
+
+      </div>
+
+      <div class="glass">
+
+        <h3>Practice</h3>
+
+        <div class="media portrait-media">
+  <video autoplay loop muted playsinline>
+    <source src="images/Video Project 9.mp4" type="video/mp4">
+  </video>
+</div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SIMULATION -->
+
+<section id="simulation">
+
+  <div class="fade">
+
+    <h2 class="section-title">Simulation</h2>
+
+    <p class="section-subtitle">
+      To help test our algorithm, a rigid body dynamics simulation was created of ball trajectories so prototyping and debugging can develop even without the robot. 
+    </p>
+
+    <div class="glass">
+
+      <h3>Simulation Environment</h3>
+<p style="margin-bottom: 30px">
+	The projectile simulation served as a critical validation tool to model realistic conditions and verify that the lookup tables produced physically consistent results, in addition to analyzing how different shots behaved.	
+</p>
+      <p style="margin-bottom: 30px">
+        A custom rigid body dynamics simulation was implemented in Java. Modeling gravity, air resistance, and backspin, the equations of motion were forward integrated in time using the Runge-Kutta method. The result is a list of 3D points (x, y, z), each with a timestamp that describes the trajectory of the ball. This simulation was used to model ball trajectories so we can pick out the shot type that would work best: high-arc or low-arc, and fast or slow shots. Derivation <a href="images/Shoot_on_the_move.pdf" target="_blank" rel="noopener noreferrer" class="inline-pdf-link">
+  can be found here
+</a>
+<h2>State space dynamics ↓</h2>
+      </p>
+
+      <div class="media">
+	<img src="images/Screenshot 2026-05-21 200028.png" alt="Equations of motion">
+	</div>
+
+      <div class="algo-media-grid">
+
+        <div class="media">
+          <video autoplay loop muted playsinline>
+    		<source src="images/Screen Recording 2026-02-08 221546.mp4" type="video/mp4">
+  	  </video>
+        </div>
+
+        <div class="media">
+          <img src="images/Screenshot 2026-05-20 211733.png" alt="Trajectory Demo">
+        </div>
+
+      </div>
+
+      <div class="media large-media">
+        <video autoplay loop muted playsinline>
+    		<source src="images/Video Project 11.mp4" type="video/mp4">
+  	  </video>
+      </div>
+
+    
+  </div>
+
+</section>
+
+<!-- TIMELINE -->
+
+<section id="timeline">
+
+  <div class="fade">
+
+    <h2 class="section-title">Development Timeline</h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="glass">
+          <h3>Phase 1 — Concept</h3>
+          <p>
+            Initial research and planning of shoot-on-the-move methods. Developing the early algorithm and final construction of "The Formula" ↓
+          </p>
+	  <div class="media">
+          <img src="images/20260212_154656.jpg" alt="CTRE Kraken motors">
+        </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="glass">
+          <h3>Phase 2 — Prototype</h3>
+          <p>
+            Prototyping the initial shoot-on-the-move code with the practice robot. Gathering all log files and analyzing bugs. Here was one of our very first test runs ↓ 
+	  </p>
+	<div class="media">
+          <video autoplay loop muted playsinline>
+    		<source src="images/Video Project 4.mp4" type="video/mp4">
+  	  </video>
+        </div>
+      </div>
+</div>
+
+      <div class="timeline-item">
+        <div class="glass">
+          <h3>Phase 3 — Iteration</h3>
+          <p>
+            Optimizing and refining lookup tables and lag compensation from log data and videos. Finding and avoiding edge cases found in practice. Added features to improve robustness, including ignoring velocity when pointing out of bounds and adding acceleration compensation.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="glass">
+          <h3>Phase 4 — Final System</h3>
+          <p>
+            Final deployment, close monitoring of log data. Mostly evaluating performance and accuracy over time for long-term robustness.
+          </p>
+	<div class="media">
+          <video autoplay loop muted playsinline>
+    		<source src="images/Video Project 8.mp4" type="video/mp4">
+  	  </video>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- RESULTS -->
+
+<section id="results">
+
+  <div class="fade">
+
+    <h2 class="section-title">Results + Reflection</h2>
+
+    <div class="grid-2">
+
+      <div class="glass">
+
+        <h3>Performance</h3>
+
+        <ul>
+          <li>Speed - Can shoot at all possible robot velocities</li>
+          <li>Over 85% accurate</li>
+          <li>Other teams have taken inspiration from our code</li>
+          <li>Our algorithm won Innovation in Control award at one of our competitions</li>
+        </ul>
+
+      </div>
+
+      <div class="glass">
+
+        <h3>Future Improvements</h3>
+
+        <ul>
+          <li>Use low-pass filters on projected distance to remove jittery movement</li>
+          <li>Tune acceleration limits better to improve accuracy</li>
+          <li>Add confidence tracking - Don't shoot if lost tracking or variance is too high for N consecutive frames</li>
+        </ul>
+
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="glass">
+
+      <h3>Final Reflection</h3>
+
+      <p>
+        This project was one of the most in-depth and rewarding projects we have ever completed. It has given me invaluable experience in the implementation and testing of algorithms from formulas on pen and paper to actual results. Overall, this project demonstrated how simulation, data-driven tuning, and real-time estimation can be unified to produce a robust competitive system that performs reliably under field conditions.
+  </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+  <p>
+    TJ²• Shoot On The Move
+  </p>
+
+</footer>
+
+<!-- JS -->
+
+<script>
+
+const observer = new IntersectionObserver(entries => {
+
+  entries.forEach(entry => {
+
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+
+  });
+
+}, {
+  threshold:0.15
+});
+
+document.querySelectorAll('.fade').forEach(el => {
+  observer.observe(el);
+});
+
+</script>
+
+</body>
+</html>
