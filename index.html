@@ -238,6 +238,15 @@ section{
   }
 }
 
+@media(max-width:700px){
+
+  .fade{
+    opacity:1;
+    transform:none;
+  }
+
+}
+
 /* MEDIA */
 
 .media{
@@ -279,7 +288,8 @@ section{
 }
 
 .media.proj img{
-  width:400px;
+  width:100%;
+  max-width:400px;
   height:auto;
 }
 
@@ -519,10 +529,10 @@ footer{
   <div class="hero-content fade">
 
     <div class="hero-tag">
-      TJ²
+      Aymen Abbassi • 774-257-3552 • aymen02324@gmail.com
     </div>
 
-    <h1>Dynamic Shooting from Static Lookup Tables</h1>
+    <h1>Dynamic Shooting from Static Lookup Tables: TrajectorySolver</h1>
 
     <div class="buttons">
       <a href="#overview" class="btn btn-primary">Explore Project</a>
@@ -548,7 +558,7 @@ footer{
     <h2 class="section-title">Project Overview</h2>
 
     <p class="section-subtitle">
-      This project details the implementation of a "shoot-on-the-move" algorithm for the 2026 FIRST Robotics game: Rebuilt.
+      This project details the implementation of a "shoot-on-the-move" algorithm for the 2026 FIRST Robotics game: Rebuilt. "TrajectorySolver" is the name of the algorithm and our codebase that enables the robot to calculate the necessary targets for shooting while in motion.
     </p>
 
     <div class="glass">
@@ -657,10 +667,14 @@ footer{
       </div>
 
       <h2 style="margin-bottom: 10px">Wheel Odometry </h2>
-         <p style="margin-bottom: 10px">Swerve-based drive system where wheel deltas are recorded using magnetic encoders and integrated over time through forward kinematics. This forms the system model of the Kalman filter. Motor encoders also provide velocity in the x and y directions, as well as angular velocity measurements needed for the algorithm.</p> 
+         <p style="margin-bottom: 10px">The robot's swerve-based drive system uses magnetic encoders that measure both wheel rotation and direction. By tracking and integrating the change in encoder values over time, we can determine the robot's position and rotation using forward kinematics. This forms the system model of the Kalman filter. Motor encoders also provide robot-relative velocity in the x and y directions, as well as angular velocity measurements needed for the algorithm.
+          </p>
+          
+          <p style="margin-bottom: 10px">However, wheel odometry alone slowly drifts over time due to wheel slip, impacts, and encoder noise. For this reason, it is combined with vision measurements to provide a more accurate and reliable estimate of the robot's state.
+         </p>
 	<h2 style="margin-bottom: 10px">Vision Measurements</h2>
        <p style="margin-bottom: 10px">
-	AprilTags state estimation through Limelight 4s, an integrated camera on a Raspberry-Pi providing field relative pose estimates. This provides the measurement model in the Kalman filter.
+	AprilTags on the field are used for state estimation through Limelight 4s, an integrated camera on a Raspberry-Pi providing field relative pose estimates. This provides the measurement model in the Kalman filter.
 	</p>
 
 	<h2 style="margin-bottom: 10px">Kalman Filter</h2>
@@ -710,8 +724,7 @@ footer{
           <h3 class="algo-title">The Algorithm</h3>
 
           <p class="algo-description">
-            The central challenge with shooting on the move is that the ball has extra displacement when given an initial velocity
-          </p>
+            The central challenge with shooting on the move is that the ball has extra displacement inherited from the robot's multi-axis motion.</p>
 
         </div>
 
@@ -727,7 +740,7 @@ footer{
   </p>
 
   <p style="margin-bottom: 20px;">
-    The projectile remains in the air for a nonzero amount of time, meaning the robot continues moving after the shot is fired. 
+    The projectile remains in the air for a nonzero amount of time, while simultaneously the robot continues moving after the shot is fired. 
     This creates a recursive dependency:
   </p>
 
@@ -739,7 +752,7 @@ time-of-flight → future distance
   </div>
 
   <p style="margin-top: 20px; margin-bottom: 20px;">
-    The distance to the target determines the projectile flight time, but the projectile flight time also determines 
+    The distance from the robot to the target, given the flywheel speed and angle, determines the projectile flight time, but this time also determines 
     how far the robot moves before the ball reaches the goal.
   </p>
 
@@ -774,7 +787,7 @@ E(t) = t - tof(d(t))
 
 
   <p style="margin-bottom: 20px">
-  Newton's method requires an accurate estimate of distance to the target, but the fused robot pose produced by the Kalman filter inherently contains uncertainty from wheel slip, encoder noise, latency, and imperfect vision measurements. 
+  Newton's Method requires an accurate estimate of distance to the target, but the fused robot pose produced by the Kalman filter inherently contains uncertainty from wheel slip, encoder noise, latency, and imperfect vision measurements. 
   That uncertainty propagates directly into the projected target distance and therefore affects the probability of successfully scoring the shot.
 </p>
 
@@ -804,10 +817,11 @@ p(hit) &lt; p_min
   <li>Reliable shot rejection during poor localization conditions</li>
   <li>Real-time execution within strict control-loop timing constraints</li>
 </ul>
-<h2>Demo Below ↓ -   <strong>
-  <span style="color: red;">Red - Fused robot pose.</span>
+<h2 style="margin-bottom: 20px;">Demo Below ↓ - Projected Targeting resulting in scoring</h2>
+ <strong>
+  <span style="color: red;">Red - Fused robot pose</span><br>
   <span style="color: green;">Green - Projected target</span>
-</strong></h2>
+</strong>
 </div>
       <div class="media large-media">
                
@@ -850,7 +864,11 @@ p(hit) &lt; p_min
           <video autoplay loop muted playsinline>
 		<source src="images/IMG_0423.mp4" type="video/mp4">
 	</video>
+
         </div>
+            <p style="text-align:center; color:var(--muted); margin-top:1rem; font-size:0.9rem;">
+    ↑ Video of TrajectorySolver succeeding while the robot is in autonomous mode. 
+  </p>
 
       </div>
 
@@ -883,7 +901,8 @@ p(hit) &lt; p_min
     <h2 class="section-title">Simulation</h2>
 
     <p class="section-subtitle">
-      To help test our algorithm, a rigid body dynamics simulation was created of ball trajectories so prototyping and debugging can develop even without the robot. 
+      To help test our algorithm, a rigid body dynamics simulation was created of ball trajectories so prototyping and debugging can develop even without the robot. This allows for development while the mechanical 
+      components are still being built to meet stringent deadlines.
     </p>
 
     <div class="glass">
@@ -893,7 +912,7 @@ p(hit) &lt; p_min
 	The projectile simulation served as a critical validation tool to model realistic conditions and verify that the lookup tables produced physically consistent results, in addition to analyzing how different shots behaved.	
 </p>
       <p style="margin-bottom: 30px">
-        A custom rigid body dynamics simulation was implemented in Java. Modeling gravity, air resistance, and backspin, the equations of motion were forward integrated in time using the Runge-Kutta method. The result is a list of 3D points (x, y, z), each with a timestamp that describes the trajectory of the ball. This simulation was used to model ball trajectories so we can pick out the shot type that would work best: high-arc or low-arc, and fast or slow shots. Derivation <a href="images/Shoot_on_the_move.pdf" target="_blank" rel="noopener noreferrer" class="inline-pdf-link">
+        I implemented a custom rigid body dynamics simulation in Java to model projectile flight under realistic conditions. The simulation incorporated gravity, aerodynamic drag, and backspin effects resulting in the derivation of the equations of motion. I then numerically integrated these equations forward in time using the Runge-Kutta method. The result is a list of 3D points (x, y, z), each with a timestamp that describes the trajectory of the ball. My simulation was used to model ball trajectories so we can pick out the shot type that would work best: high-arc or low-arc, and fast or slow shots. Derivation <a href="images/Shoot_on_the_move.pdf" target="_blank" rel="noopener noreferrer" class="inline-pdf-link">
   can be found here
 </a>
 <h2>State space dynamics ↓</h2>
@@ -940,9 +959,10 @@ p(hit) &lt; p_min
 
       <div class="timeline-item">
         <div class="glass">
-          <h3>Phase 1 — Concept</h3>
+          <h3>Phase 1 — Modeling & Simulation — Jan 2026 - Feb 2026</h3>
           <p>
-            Initial research and planning of shoot-on-the-move methods. Developing the early algorithm and final construction of "The Formula" ↓
+            Initial research and planning of shoot-on-the-move methods - This phase focused on time-of-flight estimation by deriving the mathematical models and defining any system constraints.
+            This also marked the development and completion of the shot simulation to validate the algorithm and analyze trajectory behavior under different launch conditions.
           </p>
 	  <div class="media">
           <img src="images/20260212_154656.jpg" alt="CTRE Kraken motors">
@@ -952,9 +972,9 @@ p(hit) &lt; p_min
 
       <div class="timeline-item">
         <div class="glass">
-          <h3>Phase 2 — Prototype</h3>
+          <h3>Phase 2 — Integration — Feb 2026 - Mar 2026</h3>
           <p>
-            Prototyping the initial shoot-on-the-move code with the practice robot. Gathering all log files and analyzing bugs. Here was one of our very first test runs ↓ 
+            First implementation of the initial shoot-on-the-move codebase with the practice robot. This involved adapting the velocity projection in simulation to mechanical subsystems, while collecting telemetry and replay logs for analysis. Below was one of our very first test runs ↓ 
 	  </p>
 	<div class="media">
           <video autoplay loop muted playsinline>
@@ -966,18 +986,18 @@ p(hit) &lt; p_min
 
       <div class="timeline-item">
         <div class="glass">
-          <h3>Phase 3 — Iteration</h3>
+          <h3>Phase 3 — Optimization — Mar 2026 - Apr 2026</h3>
           <p>
-            Optimizing and refining lookup tables and lag compensation from log data and videos. Finding and avoiding edge cases found in practice. Added features to improve robustness, including ignoring velocity when pointing out of bounds and adding acceleration compensation.
+            Refined lookup tables and adjusted lag-compensation based on log data and replay videos. Found the absolute limits of the lookup tables and added safeguards for Newton convergence when these limits are reached. Added acceleration limits to the drive to handle aggressive robot motion.
           </p>
         </div>
       </div>
 
       <div class="timeline-item">
         <div class="glass">
-          <h3>Phase 4 — Final System</h3>
+          <h3>Phase 4 — Deployment — Apr 2026 - May 2026</h3>
           <p>
-            Final deployment, close monitoring of log data. Mostly evaluating performance and accuracy over time for long-term robustness.
+            Deployed the finalized targeting system during competition play. Long-term monitoring yielded stable real-time performance and accuracy under match conditions.
           </p>
 	<div class="media">
           <video autoplay loop muted playsinline>
@@ -1059,22 +1079,43 @@ p(hit) &lt; p_min
 
 <script>
 
-const observer = new IntersectionObserver(entries => {
+const observer = new IntersectionObserver((entries) => {
 
   entries.forEach(entry => {
 
     if(entry.isIntersecting){
       entry.target.classList.add('show');
+
+      /* Optional:
+         stop observing after animation */
+      observer.unobserve(entry.target);
     }
 
   });
 
 }, {
-  threshold:0.15
+  threshold: 0.01,
+  rootMargin: "0px 0px -50px 0px"
 });
 
 document.querySelectorAll('.fade').forEach(el => {
   observer.observe(el);
+});
+
+/* Failsafe:
+   ensure elements already visible on load appear */
+window.addEventListener('load', () => {
+
+  document.querySelectorAll('.fade').forEach(el => {
+
+    const rect = el.getBoundingClientRect();
+
+    if(rect.top < window.innerHeight){
+      el.classList.add('show');
+    }
+
+  });
+
 });
 
 </script>
